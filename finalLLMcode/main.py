@@ -33,6 +33,6 @@ integers = tokenizer.encode(raw_text, allowed_special={"<|endoftext|>"})
 
 # print(integers)
 
-strings = tokenizer.decode(integers)
+# strings = tokenizer.decode(integers)
 
-print(strings)
+# print(strings)
