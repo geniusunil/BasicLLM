@@ -1,8 +1,9 @@
 # import importlib
 import re
+import torch
 import tiktoken
 from simple_tokenizer import SimpleTokenizerV2
-
+from gpt_dataset_v1 import GPTDatasetV1
 # import importlib
 # print(importlib.__file__)
 
@@ -27,10 +28,18 @@ with open("../the-verdict.txt", "r", encoding="utf-8") as f:
 # ids = tokenizer.encode(raw_text + " <|endoftext|> ")
 # print(ids)
 
-tokenizer = tiktoken.get_encoding("gpt2")
+# tokenizer = tiktoken.get_encoding("gpt2")
 
-integers = tokenizer.encode(raw_text, allowed_special={"<|endoftext|>"})
+# integers = tokenizer.encode(raw_text, allowed_special={"<|endoftext|>"})
+# gptdataset = GPTDatasetV1(raw_text)
+print("PyTorch version:", torch.__version__)
+dataloader = GPTDatasetV1.create_dataloader_v1(
+    raw_text, batch_size=1, max_length=4, stride=1, shuffle=False
+)
 
+data_iter = iter(dataloader)
+first_batch = next(data_iter)
+print(first_batch)
 # print(integers)
 
 # strings = tokenizer.decode(integers)
